@@ -1,0 +1,22 @@
+services:
+  ftpserver:
+    image: fauria/vsftpd
+    container_name: group_ftp_server
+    ports:
+      - "21:21"
+      - "20:20"
+      - "21100-21110:21100-21110"
+    volumes:
+      - ftp_data:/home/vsftpd
+    environment:
+      - FTP_USER=student
+      - FTP_PASS=12345
+      - PASV_ADDRESS=host.docker.internal
+      - PASV_MIN_PORT=21100
+      - PASV_MAX_PORT=21110
+      - PASV_ADDR_RESOLVE=YES
+      - LOG_STDOUT=YES
+    restart: unless-stopped
+
+volumes:
+  ftp_data:
