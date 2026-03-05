@@ -1,0 +1,99 @@
+/* ส่วนตกแต่ง */
+
+/* ตั้งค่าพื้นฐานทั้งหน้าเว็บ */
+* {
+     box-sizing: border-box;                                    /*คำนวณขนาด */
+     font-family: Arial, Helvetica, sans-serif;                 /* ฟอนต์หลัก */
+}
+
+/* พื้นหลังและตำแหน่งหน้าเว็บ */
+body {
+    background: linear-gradient(135deg, #15ac30, #000000);
+    height: 100vh;                                              /* ความสูงเต็มหน้าจอ */
+    margin: 0;                                                  /* ขอบขาวรอบหน้าเว็บ */
+    display: flex;                                              /* ใช้จัดตำแหน่ง */
+    justify-content: center;                                    /* จัดกึ่งกลางแนวนอน */
+    align-items: center;                                        /* จัดกึ่งกลางแนวตั้ง */
+}
+    /* กล่องหลัก (Card) */
+.card {
+     background: #fff;                                        /* พื้นหลัง */
+     width: 350px;                                              /* ความกว้าง */
+     padding: 30px;                                             /* ระยะห่างด้านใน */
+     border-radius: 12px;                                       /* มุม */
+     box-shadow: 0 10px 30px rgba(0,0,0,0.2);                 /* เงา */
+     text-align: center;                                        /* จัดข้อความ */
+}
+
+/* หัวข้อ */
+.card h2 {
+    margin-bottom: 20px;                                  
+}
+
+/* ช่องกรอกข้อมูล */
+input {
+    width: 100%;
+    padding: 10px;                                             /* ช่องพิมพ์ */
+    margin: 8px 0;                                             /* ระยะห่าง */
+    border-radius: 8px;
+    border: 1px solid #ccc; 
+    outline: none;                                          
+}
+
+/* ช่องกรอกข้อมูล */
+input:focus {
+    border-color: #667eea;
+}
+/* ปุ่ม Login / Upload */
+button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    background: #8409cb;
+    border: none;
+    color: white;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+/* สีตอนชี้ Login */
+button:hover {
+    background: #33ab6b;
+}
+/* สีสมัครสมาชิก */
+a {
+    display: block;
+    margin-top: 15px;
+    text-decoration: none;
+    color: #5614b8;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* ปุ่มออกจากระบบ */
+.logout {
+    margin-top: 20px;
+    display: inline-block;
+    color: red;
+}
+
+/* ไฟล์ */
+.file {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 5px 0;
+}
+
+/* ปุ่มลบไฟล์ */
+.file button {
+    background: red;
+    padding: 5px 10px;
+    font-size: 12px;
+}
+
+.file button:hover {
+    background: darkred;
+}

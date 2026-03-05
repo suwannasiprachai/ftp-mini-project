@@ -1,0 +1,49 @@
+<!-- เว็บ -->
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <title>Login</title>
+    <!-- ชื่อหน้าเว็บ แสดงบนแท็บของเบราว์เซอร์ -->
+
+    <link rel="stylesheet" href="/static/style.css">
+    <!-- เชื่อมไฟล์ CSS สำหรับตกแต่งหน้าเว็บ
+         /static คือโฟลเดอร์ static ของ Flask -->
+</head>
+
+<body>
+<!-- ส่วนแสดงผลเนื้อหาของหน้าเว็บ -->
+
+<div class="card">
+    <!-- กล่องหลักของหน้า Login
+         class="card" ใช้จัด layout และตกแต่งด้วย CSS -->
+
+    <h2>Login</h2>
+    <!-- หัวข้อหน้า Login -->
+
+    <form method="POST" action="/">
+        <!-- ฟอร์มสำหรับ Login
+             method="POST" ใช้ส่งข้อมูลไปยัง Backend (Flask)
+             action="/" ส่งข้อมูลไปที่ route "/" -->
+
+        <input type="text" name="username" placeholder="Username" required>
+        <!-- ช่องกรอกชื่อผู้ใช้
+             name="username" ใช้รับค่าฝั่ง Flask
+             required บังคับให้กรอกก่อนกด Login -->
+
+        <input type="password" name="password" placeholder="Password" required>
+        <!-- ช่องกรอกรหัสผ่าน
+             type="password" ซ่อนตัวอักษรเพื่อความปลอดภัย -->
+
+        <button type="submit">Login</button>
+        <!-- ปุ่มกดส่งข้อมูล Login -->
+    </form>
+
+    <a href="/register">สมัครสมาชิก</a>
+    <!-- ลิงก์ไปหน้า Register สำหรับสร้างผู้ใช้ใหม่ -->
+</div>
+
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!-- เว็บ -->
+<!DOCTYPE html>
+
+<html>
+<head>
+     <title>FTP น่ะจ๊ะ</title>
+     <!-- ชื่อหน้าเว็บ แสดงบนแท็บเบราว์เซอร์ -->
+
+     <link rel="stylesheet" href="/static/style.css">
+     <!-- เชื่อมไฟล์ CSS สำหรับตกแต่ง UI
+          /static เป็นโฟลเดอร์ static ของ Flask -->
+</head>
+
+<body>
+
+<div class="card">
+    <!-- กล่องหลักของหน้า Dashboard
+         ใช้ class card เพื่อจัด layout และตกแต่ง -->
+
+    <h2>FTP น่ะจ๊ะ</h2>
+    <!-- ชื่อระบบ -->
+
+    <p>ยินดีต้อนรับคุณ <b>{{ user }}</b></p>
+    <!-- แสดงชื่อผู้ใช้
+         {{ user }} รับค่ามาจาก Flask ผ่าน render_template -->
+
+    <hr>
+    <!-- เส้นคั่น -->
+
+    <h3>อัปโหลดไฟล์</h3>
+    <!-- หัวข้อส่วน Upload -->
+
+    {% if mode == "ftp" %}
+    <!-- ตรวจสอบโหมดการทำงาน
+         ถ้า mode = ftp แสดงว่ากำลังใช้งาน FTP Server -->
+
+    <form action="/ftp-upload" method="POST" enctype="multipart/form-data">
+    <!-- ฟอร์มอัปโหลดไฟล์ไปยัง FTP Server -->
+
+    {% else %}
+    <!-- ถ้าไม่ใช่โหมด FTP (local mode) -->
+
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+    <!-- ฟอร์มอัปโหลดไฟล์ไปยังเครื่อง Local -->
+
+    {% endif %}
+        <input type="file" name="file" required>
+        <!-- ช่องเลือกไฟล์
+             name="file" ใช้รับค่าฝั่ง Flask -->
+
+        <button type="submit">Upload</button>
+        <!-- ปุ่มอัปโหลด -->
+    </form>
+
+    <hr>
+
+    <h3>ไฟล์ทั้งหมด</h3>
+    <!-- หัวข้อแสดงรายการไฟล์ -->
+
+    {% if files %}
+    <!-- ตรวจสอบว่ามีไฟล์หรือไม่ -->
+
+        {% for file in files %}
+        <!-- วนลูปแสดงไฟล์ทั้งหมดที่ Flask ส่งมา -->
+
+            <div class="file">
+            <!-- กล่องแสดงไฟล์แต่ละรายการ -->
+
+                {% if mode == "ftp" %}
+                <!-- ถ้าอยู่ในโหมด FTP -->
+
+                    <a href="/ftp-download/{{ file }}">{{ file }}</a>
+                    <!-- ลิงก์ดาวน์โหลดไฟล์จาก FTP Server -->
+
+                    <form action="/ftp-delete/{{ file }}" method="POST" style="display:inline;">
+                        <!-- ฟอร์มลบไฟล์บน FTP Server -->
+                        <button type="submit">ลบ</button>
+                    </form>
+
+                {% else %}
+                <!-- ถ้าอยู่ในโหมด Local -->
+
+                    <a href="/download/{{ file }}">{{ file }}</a>
+                    <!-- ลิงก์ดาวน์โหลดไฟล์จากเครื่อง Local -->
+
+                    <form action="/delete/{{ file }}" method="POST" style="display:inline;">
+                        <!-- ฟอร์มลบไฟล์ในเครื่อง -->
+                        <button type="submit">ลบ</button>
+                    </form>
+
+                {% endif %}
+
+            </div>
+        {% endfor %}
+
+    {% else %}
+        <!-- กรณีไม่มีไฟล์ -->
+        <p>ยังไม่มีไฟล์</p>
+    {% endif %}
+
+    <hr>
+
+    <a class="logout" href="/logout">ออกจากระบบ</a>
+    <!-- ปุ่ม Logout
+         ล้าง session และกลับไปหน้า Login -->
+</div>
+
+</body>
+</html>

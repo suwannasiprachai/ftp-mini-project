@@ -1,0 +1,49 @@
+<!-- เว็บ -->
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <title>Register</title>
+    <!-- ชื่อหน้าเว็บที่แสดงบนแท็บเบราว์เซอร์ -->
+
+    <link rel="stylesheet" href="/static/style.css">
+    <!-- เชื่อมไฟล์ CSS สำหรับตกแต่งหน้าเว็บ
+         /static คือโฟลเดอร์ static ของ Flask -->
+</head>
+
+<body>
+<!-- ส่วนแสดงผลหลักของหน้าเว็บ -->
+
+<div class="card">
+    <!-- div กล่องหลักของหน้า Register
+         class="card" ใช้จัด layout และตกแต่งด้วย CSS -->
+
+    <h2>Register</h2>
+    <!-- หน้า สมัครสมาชิก -->
+
+    <form method="POST">
+        <!-- ฟอร์มสมัครสมาชิก
+             method="POST" ใช้ส่งข้อมูลไปที่ backend (Flask)
+             URL ปลายทางคือ route /register -->
+
+        <input type="text" name="username" placeholder="Username" required>
+        <!-- ช่องกรอกชื่อผู้ใช้
+             name="username" ใช้ส่งค่าไปยัง Flask
+             required บังคับให้กรอกก่อนส่งฟอร์ม -->
+
+        <input type="password" name="password" placeholder="Password" required>
+        <!-- ช่องกรอกรหัสผ่าน
+             type="password" ซ่อนตัวอักษร -->
+
+        <button type="submit">สมัครสมาชิก</button>
+        <!-- ปุ่มกดส่งข้อมูลสมัครสมาชิก -->
+    </form>
+
+    <a href="/">กลับไปล็อกอิน</a>
+    <!-- ลิงก์กลับไปหน้า Login (route /) -->
+</div>
+
+</body>
+</html>

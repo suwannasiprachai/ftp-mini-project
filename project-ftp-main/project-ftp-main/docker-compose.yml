@@ -1,0 +1,31 @@
+version: "3.8"
+
+services:
+
+  web:
+    build: .
+    container_name: web-app # ตั้งชื่อ container ว่า web-app
+    ports:
+      - "8000:8000" # พอร์ต 8000 บนเครื่องคุณ (localhost)โลคอลโฮส เชื่อมไปยังพอร์ต 8000 ใน container
+    depends_on:
+      - ftp # Docker จะเริ่ม service ftp ก่อน web แต่ไม่ได้แปลว่า ftp พร้อมใช้งาน 100% แค่สั่งให้ start ก่อนเฉย ๆ
+
+  ftp:
+    image: stilliard/pure-ftpd
+    container_name: ftp-server
+
+    ports:
+      - "21:21" # พอร์ต 21 คือพอร์ตหลักของ FTP
+      - "30000-30009:30000-30009" # ใช้สำหรับ Passive Mode
+
+    environment:
+      PUBLICHOST: "ftp" # กำหนด hostname ที่ใช้ใน passive mode
+      FTP_USER_NAME: YJ
+      FTP_USER_PASS: 1234
+      FTP_USER_HOME: /home/ftpusers/ftpuser1 
+      ADDED_FLAGS: "--passiveportrange 30000:30009 --forcepassiveip ftp" # กำหนด option(อ็อบชัน) เพิ่มให้ pure-ftpd(เพียวFTP)
+
+    restart: always
+    # ไม่มีการ map ใช้ FTP container อย่างเดียว
+    # ไฟล์ถูกเก็บใน FTP container ที่ path /home/ftpusers/ftpuser1
+    # wab ไม่ได้เขียนไฟล์โดยตรง ใช้ ftplib ติดต่อผ่านพอร์ต 21 และ passive ports เท่านั้น
